@@ -1,8 +1,28 @@
-<h1><%= @restaurant.name %></h1>
+<div class="container">
+  <h1><%= @restaurant.name %></h1>
 
-<ul class="list-group">
-  <li class="list-group-item"><%= @restaurant.address %></li>
-  <li class="list-group-item"><%= @restaurant.category %></li>
-</ul>
+  <ul class="list-group">
+    <li class="list-group-item"><%= @restaurant.address %></li>
+    <li class="list-group-item"><%= @restaurant.category %></li>
+  </ul>
+</div>
+<br>
+<%# <p><strong>Reviews</strong></p> %>
+<div class="container">
+  <ul class="list-group">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item"><%= review.content %></li>
+      <li class="list-group-item"><%= review.rating %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= simple_form_for [@restaurant, @review] do |f| %>
+ <p>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.submit %>
+</p>
+<% end %>
 
 <%= link_to "Go back", restaurants_path %>
